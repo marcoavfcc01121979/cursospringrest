@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+// @CrossOrigin Assim é liberado para todos
+@CrossOrigin(origins = "*") // Todos os lugares vao passar
+// @CrossOrigin(origins = {"www.teste.com.br", "www.teste1.com.br"})
 @RestController
 @RequestMapping(value = "/usuario")
 public class IndexController {
@@ -42,6 +45,7 @@ public class IndexController {
         return new ResponseEntity<Usuario>(usuario.get(), HttpStatus.OK);
     }
 
+    // @CrossOrigin(origins = {"www.teste.com.br", "www.teste1.com.br"}) so vou listar desses end-points
     @GetMapping(value = "/", produces = "application/json")
     public ResponseEntity<List<Usuario>> usuario() {
         List<Usuario> list = (List<Usuario>) usuarioRepository.findAll();
@@ -49,6 +53,7 @@ public class IndexController {
         return  new ResponseEntity<List<Usuario>>(list, HttpStatus.OK);
     }
 
+    // @CrossOrigin(origins = {"www.teste.com.br", "www.teste1.com.br"}) so vou cadastrar desses end-points
     @PostMapping(value = "/", produces = "application/json")
     public ResponseEntity<Usuario> cadastrar(@RequestBody Usuario usuario) {
 
